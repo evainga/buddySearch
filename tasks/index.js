@@ -6,9 +6,9 @@ Surfer = class {
     }
 
     surfs(surfspot) {
-        if (surfspot.hasSwell === false || this.surfboards.length === 0) {
-            if (surfspot.hasSwell === false) {
-                console.log(this.name + " can't surf " + surfspot.name + " because currently there are no waves!");
+        if (surfspot.swell === 0 || this.surfboards.length === 0) {
+            if (surfspot.swell === 0) {
+                console.log(this.name + " can't surf " + surfspot.name + " because currently there is no Swell!");
             }
             if (this.surfboards.length === 0) {
                 console.log(this.name + " can't surf because " + this.name + " has no surf board!");
@@ -32,7 +32,7 @@ Surfspot = class {
     constructor(name) {
         this.name = name;
         this.surfers = [];
-        this.hasSwell = false;
+        this.swell = 0;
     }
 
     printSurferNames() {
@@ -51,29 +51,33 @@ Surfboard = class {
     }
 };
 
-Waves = class {
+Swell = class {
     constructor(power) {
         this.power = power;
     }
 
-    arriveAt(surfspot) {
+    arrivesAt(surfspot) {
         if (this.power > 0) {
-            console.log("Waves arrive at " + surfspot.name);
-            surfspot.hasSwell = true;
+            console.log("Swell arrives at " + surfspot.name);
+            surfspot.swell = surfspot.swell + this.power;
+            getCurrentSwell(surfspot);
         }
     }
 
-    leaveFrom(surfspot) {
-        if (surfspot.hasSwell === true) {
-            console.log("Waves leave from " + surfspot.name);
-            surfspot.hasSwell = false;
+    leavesFrom(surfspot) {
+        if (surfspot.swell >= this.power) {
+            surfspot.swell = surfspot.swell - this.power;
+
+            console.log("Swell leaves from " + surfspot.name);
+            getCurrentSwell(surfspot);
         } else {
-            console.log("Error: " + surfspot.name + " currently doesn't have waves, so they can't leave!");
+            console.log("Error: " + surfspot.name + " currently doesn't have enough swell, so it can't leave!");
         }
     }
 };
 
 printName = surfer => console.log(surfer.name);
+getCurrentSwell = surfspot => console.log("Swell at " + surfspot.name + " is now " + surfspot.swell);
 
 eva = new Surfer("Eva");
 mike = new Surfer("Mike");
@@ -86,11 +90,11 @@ uluwatu.printSurferNames();
 
 eva.surfs(muizenberg);
 
-strongWaves = new Waves(5);
-weakWaves = new Waves(1);
+strongSwell = new Swell(5);
+weakSwell = new Swell(1);
 
-weakWaves.arriveAt(muizenberg);
-strongWaves.arriveAt(uluwatu);
+weakSwell.arrivesAt(muizenberg);
+strongSwell.arrivesAt(uluwatu);
 
 sharkie = new Surfboard("Sharkie");
 dipper = new Surfboard("Dipper");
@@ -103,8 +107,8 @@ eva.surfs(muizenberg);
 mike.buys(dipper);
 mike.surfs(muizenberg);
 
-weakWaves.leaveFrom(muizenberg);
-weakWaves.leaveFrom(muizenberg);
+weakSwell.leavesFrom(muizenberg);
+weakSwell.leavesFrom(muizenberg);
 mike.surfs(muizenberg);
 
 muizenberg.printSurferNames();
