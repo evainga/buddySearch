@@ -5,10 +5,10 @@ Surfer = class {
         this.surfSessions = 0;
     }
 
-    surfs(surfspot) {
+    surf(surfspot) {
         if (surfspot.swell === 0 || this.surfboards.length === 0) {
             if (surfspot.swell === 0) {
-                console.log(this.name + " can't surf " + surfspot.name + " because currently there is no Swell!");
+                console.log(this.name + " can't surf " + surfspot.name + " because currently there is no swell!");
             }
             if (this.surfboards.length === 0) {
                 console.log(this.name + " can't surf because " + this.name + " has no surf board!");
@@ -22,7 +22,7 @@ Surfer = class {
         }
     }
 
-    buys(surfboard) {
+    buy(surfboard) {
         console.log(this.name + " buys " + surfboard.modelName);
         this.surfboards.push(surfboard);
     }
@@ -56,7 +56,7 @@ Swell = class {
         this.power = power;
     }
 
-    arrivesAt(surfspot) {
+    arrive(surfspot) {
         if (this.power > 0) {
             console.log("Swell arrives at " + surfspot.name);
             surfspot.swell = surfspot.swell + this.power;
@@ -64,7 +64,7 @@ Swell = class {
         }
     }
 
-    leavesFrom(surfspot) {
+    leave(surfspot) {
         if (surfspot.swell >= this.power) {
             surfspot.swell = surfspot.swell - this.power;
 
@@ -88,28 +88,28 @@ muizenberg = new Surfspot("Muizenberg");
 muizenberg.printSurferNames();
 uluwatu.printSurferNames();
 
-eva.surfs(muizenberg);
+eva.surf(muizenberg);
 
 strongSwell = new Swell(5);
 weakSwell = new Swell(1);
 
-weakSwell.arrivesAt(muizenberg);
-strongSwell.arrivesAt(uluwatu);
+weakSwell.arrive(muizenberg);
+strongSwell.arrive(uluwatu);
 
 sharkie = new Surfboard("Sharkie");
 dipper = new Surfboard("Dipper");
 loonie = new Surfboard("Loonie");
 
-eva.buys(loonie);
-eva.surfs(uluwatu);
-eva.surfs(muizenberg);
-eva.surfs(muizenberg);
-mike.buys(dipper);
-mike.surfs(muizenberg);
+eva.buy(loonie);
+eva.surf(uluwatu);
+eva.surf(muizenberg);
+eva.surf(muizenberg);
+mike.buy(dipper);
+mike.surf(muizenberg);
 
-weakSwell.leavesFrom(muizenberg);
-weakSwell.leavesFrom(muizenberg);
-mike.surfs(muizenberg);
+weakSwell.leave(muizenberg);
+weakSwell.leave(muizenberg);
+mike.surf(muizenberg);
 
 muizenberg.printSurferNames();
 uluwatu.printSurferNames();
