@@ -1,2 +1,2 @@
 # wtmbJS
-This is my small repo for the homework of wtmb Javascript course 2019
+This is my little playground for the homework of WTMB Javascript course 2019
