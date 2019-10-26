@@ -8,6 +8,6 @@ module.exports = class BuddySearch {
     };
 
     summarizeSearch(name, location, date, level) {
-        return name + "-" + location.name + "-" + date.getYear() + "/" + date.getMonth() + "/" + date.getDay() + "-" + level;
+        return name + "-" + location.name + "-" + date + "-" + level;
     }
 };

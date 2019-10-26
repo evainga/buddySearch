@@ -14,9 +14,9 @@ const saveSearch = function (buddySearch) {
     
     if (fs.existsSync(dataStorage)) {
         let buddySearches = this.load(dataStorage);
-        buddySearchSummaries = []
+        let buddySearchSummaries = []
         buddySearches.forEach(buddySearch => {
-            const summary = buddySearch.summary
+            let summary = buddySearch.summary
             buddySearchSummaries.push(summary)
         });
         if (buddySearchSummaries.includes(buddySearch.summary)) {
