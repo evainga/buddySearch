@@ -1,43 +1,32 @@
-const Surfer = require("./surfer")
-const Surfboard = require("./surfboard")
-const Swell = require("./swell")
-const Surfspot = require("./surfspot")
+const Boulderer = require("./boulderer")
+const BoulderShoe = require("./boulderShoe")
+const Location = require("./location")
 
 
-printName = surfer => console.log(surfer.name);
-getCurrentSwell = surfspot => console.log("Swell at " + surfspot.name + " is now " + surfspot.swell);
+printName = Boulderer => console.log(Boulderer.name);
 
-eva = new Surfer("Eva");
-mike = new Surfer("Mike");
+eva = new Boulderer("Eva");
+mike = new Boulderer("Mike");
 
-uluwatu = new Surfspot("Uluwatu");
-muizenberg = new Surfspot("Muizenberg");
+brightSite = new Location("Bright Site");
+boulderGarten = new Location("Bouldergarten");
 
-muizenberg.printSurferNames();
-uluwatu.printSurferNames();
+boulderGarten.printBouldererNames();
+brightSite.printBouldererNames();
 
-eva.surf(muizenberg);
+eva.boulder(boulderGarten);
 
-strongSwell = new Swell(5);
-weakSwell = new Swell(1);
-
-weakSwell.arrive(muizenberg);
-strongSwell.arrive(uluwatu);
-
-sharkie = new Surfboard("Sharkie");
-dipper = new Surfboard("Dipper");
-loonie = new Surfboard("Loonie");
+dipper = new BoulderShoe("Dipper");
+loonie = new BoulderShoe("Loonie");
 
 eva.buy(loonie);
-eva.surf(uluwatu);
-eva.surf(muizenberg);
-eva.surf(muizenberg);
+eva.boulder(brightSite);
+eva.boulder(boulderGarten);
+eva.boulder(boulderGarten);
 mike.buy(dipper);
-mike.surf(muizenberg);
+mike.boulder(boulderGarten);
 
-weakSwell.leave(muizenberg);
-weakSwell.leave(muizenberg);
-mike.surf(muizenberg);
+mike.boulder(boulderGarten);
 
-muizenberg.printSurferNames();
-uluwatu.printSurferNames();
+boulderGarten.printBouldererNames();
+brightSite.printBouldererNames();
