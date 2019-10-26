@@ -8,7 +8,7 @@ module.exports = class Location {
         if (this.boulderers.length === 0) {
             console.log("Nobody has bouldered " + this.name + ".");
         } else {
-            console.log("Boulderer who have bouldered " + this.name + ":");
+            console.log("Boulderers who have bouldered " + this.name + ":");
             this.boulderers.forEach(printName);
         }
     }

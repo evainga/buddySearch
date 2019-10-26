@@ -1,12 +1,13 @@
 module.exports = class BuddySearch {
-    constructor(location, date, level) {
+    constructor(name, location, date, level) {
+        this.name = name;
         this.location = location;
         this.date = date;
         this.level = level;
-        this.summary = this.summarizeSearch(location, date, level);
+        this.summary = this.summarizeSearch(name, location, date, level);
     };
 
-    summarizeSearch(location, date, level) {
-        return location.name + "-" + date.getYear() + "/" + date.getMonth() + "/" + date.getDay() + "-" + level;
+    summarizeSearch(name, location, date, level) {
+        return name + "-" + location.name + "-" + date.getYear() + "/" + date.getMonth() + "/" + date.getDay() + "-" + level;
     }
 };

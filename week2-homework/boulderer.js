@@ -1,5 +1,5 @@
 const BuddySearch = require("./buddySearch")
-const BuddySearchDatabase = require("./buddySearchDatabase")
+const BuddySearchDB = require("./buddySearchDB")
 
 module.exports = class Boulderer {
     constructor(name, level) {
@@ -9,10 +9,10 @@ module.exports = class Boulderer {
     }
 
     searchBuddy(location, date) {
-        const buddySearch = new BuddySearch(location, date, this.level);
-        console.log(this.name + " is searching for a boulder buddy with search " + buddySearch.summary);
+        const buddySearch = new BuddySearch(this.name, location, date, this.level);
 
-        BuddySearchDatabase.save("buddySearch.json", buddySearch)
+        console.log(this.name + " is searching for a boulder buddy with search " + buddySearch.summary);
+        BuddySearchDB.saveSearch(buddySearch);
     }
 
     boulder(location) {

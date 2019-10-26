@@ -1,5 +1,6 @@
 const Boulderer = require("./boulderer")
 const Location = require("./location")
+const BuddySearchDB = require("./buddySearchDB")
 
 printName = Boulderer => console.log(Boulderer.name)
 
@@ -22,3 +23,9 @@ brightSite.printBouldererNames()
 
 eva.searchBuddy(brightSite, new Date(2019, 10, 30))
 mike.searchBuddy(boulderGarten, new Date(2019, 11, 01))
+
+const buddySearches = BuddySearchDB.load("buddySearch.json")
+
+buddySearches.forEach(buddySearch => {
+    console.log(buddySearch)
+});
