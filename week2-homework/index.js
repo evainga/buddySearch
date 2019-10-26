@@ -1,32 +1,24 @@
 const Boulderer = require("./boulderer")
-const BoulderShoe = require("./boulderShoe")
 const Location = require("./location")
 
+printName = Boulderer => console.log(Boulderer.name)
 
-printName = Boulderer => console.log(Boulderer.name);
-
-eva = new Boulderer("Eva");
-mike = new Boulderer("Mike");
+eva = new Boulderer("Eva", "ADVANCED")
+mike = new Boulderer("Mike", "BEGINNER")
 
 brightSite = new Location("Bright Site");
-boulderGarten = new Location("Bouldergarten");
+boulderGarten = new Location("Bouldergarten")
 
-boulderGarten.printBouldererNames();
-brightSite.printBouldererNames();
+boulderGarten.printBouldererNames()
+brightSite.printBouldererNames()
 
-eva.boulder(boulderGarten);
+eva.boulder(boulderGarten)
+eva.boulder(boulderGarten)
+mike.boulder(boulderGarten)
+mike.boulder(brightSite)
 
-dipper = new BoulderShoe("Dipper");
-loonie = new BoulderShoe("Loonie");
+boulderGarten.printBouldererNames()
+brightSite.printBouldererNames()
 
-eva.buy(loonie);
-eva.boulder(brightSite);
-eva.boulder(boulderGarten);
-eva.boulder(boulderGarten);
-mike.buy(dipper);
-mike.boulder(boulderGarten);
-
-mike.boulder(boulderGarten);
-
-boulderGarten.printBouldererNames();
-brightSite.printBouldererNames();
+eva.searchBuddy(brightSite, new Date(2019, 10, 30))
+mike.searchBuddy(boulderGarten, new Date(2019, 11, 01))

@@ -19,4 +19,4 @@ console.log(Chalk.blue.bgRed.bold("hello world", "afds"))
 
 Database.save("meetup.json", wtmb)
 const loadedFile = Database.load("meetup.json")
-console.log(loadedFile.name)
+console.log(loadedFile)

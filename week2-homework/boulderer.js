@@ -1,26 +1,25 @@
+const BuddySearch = require("./buddySearch")
+const BuddySearchDatabase = require("./buddySearchDatabase")
+
 module.exports = class Boulderer {
-    constructor(name) {
+    constructor(name, level) {
         this.name = name;
-        this.boulderShoes = [];
         this.boulderSessions = 0;
+        this.level = level;
+    }
+
+    searchBuddy(location, date) {
+        const buddySearch = new BuddySearch(location, date, this.level);
+        console.log(this.name + " is searching for a boulder buddy with search " + buddySearch.summary);
+
+        BuddySearchDatabase.save("buddySearch.json", buddySearch)
     }
 
     boulder(location) {
-        if (this.boulderShoes.length === 0) {
-            if (this.boulderShoes.length === 0) {
-                console.log(this.name + " can't boulder because " + this.name + " has no boulder shoes!");
-            }
-        } else {
-            console.log(this.name + " boulders " + location.name);
-            this.boulderSessions += 1;
-            if (!location.boulderers.includes(this)) {
-                location.boulderers.push(this);
-            }
+        console.log(this.name + " boulders " + location.name);
+        this.boulderSessions += 1;
+        if (!location.boulderers.includes(this)) {
+            location.boulderers.push(this);
         }
     }
-
-    buy(boulderShoes) {
-        console.log(this.name + " buys " + boulderShoes.modelName);
-        this.boulderShoes.push(boulderShoes);
-    }
-};
+}
