@@ -1,14 +1,12 @@
-const Boulderer = require("./boulderer")
-const Location = require("./location")
-const BuddySearchDB = require("./buddySearchDB")
+const Boulderer = require('./boulderer')
+const Location = require('./location')
+const BuddySearchDB = require('./buddySearchDB')
 
-printName = Boulderer => console.log(Boulderer.name)
+const eva = new Boulderer('Eva', 'ADVANCED')
+const mike = new Boulderer('Mike', 'BEGINNER')
 
-eva = new Boulderer("Eva", "ADVANCED")
-mike = new Boulderer("Mike", "BEGINNER")
-
-brightSite = new Location("Bright Site");
-boulderGarten = new Location("Bouldergarten")
+const brightSite = new Location('Bright Site')
+const boulderGarten = new Location('Bouldergarten')
 
 boulderGarten.printBouldererNames()
 brightSite.printBouldererNames()
@@ -22,10 +20,10 @@ boulderGarten.printBouldererNames()
 brightSite.printBouldererNames()
 
 eva.searchBuddy(brightSite, new Date(2019, 10, 30))
-mike.searchBuddy(boulderGarten, new Date(2019, 11, 01))
+mike.searchBuddy(boulderGarten, new Date(2019, 11, 1))
 
-const buddySearches = BuddySearchDB.load("buddySearch.json")
+const buddySearches = BuddySearchDB.load('buddySearch.json')
 
 buddySearches.forEach(buddySearch => {
-    console.log(buddySearch)
-});
+  console.log(buddySearch)
+})
