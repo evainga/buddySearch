@@ -1,7 +1,7 @@
 const fs = require('fs')
 
 const save = function (filename, buddySearch) {
-  fs.writeFileSync(filename, JSON.stringify(buddySearch))
+  fs.writeFileSync(filename, JSON.stringify(buddySearch, null, 2))
 }
 
 const load = function (filename) {

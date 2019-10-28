@@ -1,1 +1,39 @@
-[{"name":"Eva","location":{"name":"Bright Site","boulderers":[{"name":"Mike","boulderSessions":2,"level":"BEGINNER"}]},"date":"30/11/2019","level":"ADVANCED","summary":"Eva-Bright Site-30/11/2019-ADVANCED"},{"name":"Mike","location":{"name":"Bouldergarten","boulderers":[{"name":"Eva","boulderSessions":2,"level":"ADVANCED"},{"name":"Mike","boulderSessions":2,"level":"BEGINNER"}]},"date":"1/12/2019","level":"BEGINNER","summary":"Mike-Bouldergarten-1/12/2019-BEGINNER"}]
+[
+  {
+    "name": "Eva",
+    "location": {
+      "name": "Bright Site",
+      "boulderers": [
+        {
+          "name": "Mike",
+          "boulderSessions": 2,
+          "level": "BEGINNER"
+        }
+      ]
+    },
+    "date": "30/11/2019",
+    "level": "ADVANCED",
+    "summary": "Eva-Bright Site-30/11/2019-ADVANCED"
+  },
+  {
+    "name": "Mike",
+    "location": {
+      "name": "Bouldergarten",
+      "boulderers": [
+        {
+          "name": "Eva",
+          "boulderSessions": 2,
+          "level": "ADVANCED"
+        },
+        {
+          "name": "Mike",
+          "boulderSessions": 2,
+          "level": "BEGINNER"
+        }
+      ]
+    },
+    "date": "1/12/2019",
+    "level": "BEGINNER",
+    "summary": "Mike-Bouldergarten-1/12/2019-BEGINNER"
+  }
+]
