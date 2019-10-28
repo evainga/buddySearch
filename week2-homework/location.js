@@ -9,11 +9,7 @@ module.exports = class Location {
       console.log('Nobody has bouldered ' + this.name + '.')
     } else {
       console.log('Boulderers who have bouldered ' + this.name + ':')
-      this.boulderers.forEach(this.printName())
+      this.boulderers.forEach(boulderer => boulderer.printName())
     }
-  }
-
-  printName () {
-    return boulderer => console.log(boulderer.name)
   }
 }

@@ -24,4 +24,8 @@ module.exports = class Boulderer {
       location.boulderers.push(this)
     }
   }
+
+  printName () {
+    return console.log(this.name)
+  }
 }
