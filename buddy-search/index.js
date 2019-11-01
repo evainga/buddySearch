@@ -1,5 +1,5 @@
-const Boulderer = require('./boulderer')
-const Location = require('./location')
+const Boulderer = require('./models/boulderer')
+const Location = require('./models/location')
 const BuddySearchDB = require('./buddySearchDB')
 
 const eva = new Boulderer('Eva', 'ADVANCED')

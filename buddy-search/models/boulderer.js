@@ -1,5 +1,5 @@
 const BuddySearch = require('./buddySearch')
-const BuddySearchDB = require('./buddySearchDB')
+const BuddySearchDB = require('../buddySearchDB')
 const moment = require('moment')
 
 module.exports = class Boulderer {
