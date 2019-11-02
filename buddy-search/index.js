@@ -1,29 +1,35 @@
 const Boulderer = require('./models/boulderer')
 const Location = require('./models/location')
-const BuddySearchDB = require('./buddySearchDB')
 
-const eva = new Boulderer('Eva', 'ADVANCED')
-const mike = new Boulderer('Mike', 'BEGINNER')
+const BouldererService = require('./services/boulderer-service')
+const LocationService = require('./services/location-service')
 
-const brightSite = new Location('Bright Site')
-const boulderGarten = new Location('Bouldergarten')
+async function main () {
+  const eva = new Boulderer('Eva', 'ADVANCED')
+  const mike = new Boulderer('Mike', 'BEGINNER')
 
-boulderGarten.printBouldererNames()
-brightSite.printBouldererNames()
+  const brightSite = new Location('Bright Site')
+  const boulderGarten = new Location('Bouldergarten')
 
-eva.boulder(boulderGarten)
-eva.boulder(boulderGarten)
-mike.boulder(boulderGarten)
-mike.boulder(brightSite)
+  await BouldererService.add(eva)
+  await BouldererService.add(mike)
+  await LocationService.add(brightSite)
+  await LocationService.add(boulderGarten)
 
-boulderGarten.printBouldererNames()
-brightSite.printBouldererNames()
+  boulderGarten.printBouldererNames()
+  brightSite.printBouldererNames()
 
-eva.searchBuddy(brightSite, new Date(2019, 10, 30))
-mike.searchBuddy(boulderGarten, new Date(2019, 11, 1))
+  eva.boulder(boulderGarten)
+  eva.boulder(boulderGarten)
+  mike.boulder(boulderGarten)
+  mike.boulder(brightSite)
 
-const buddySearches = BuddySearchDB.load('buddySearch.json')
+  boulderGarten.printBouldererNames()
+  brightSite.printBouldererNames()
 
-buddySearches.forEach(buddySearch => {
-  console.log(buddySearch)
-})
+  await eva.searchBuddy(brightSite, new Date(2019, 10, 30))
+  await mike.searchBuddy(boulderGarten, new Date(2019, 11, 1))
+  await mike.searchBuddy(boulderGarten, new Date(2019, 11, 1))
+}
+
+main()
