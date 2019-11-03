@@ -1,6 +1,5 @@
 const BuddySearch = require('./buddy-search')
 const BuddySearchService = require('../services/buddy-search-service')
-const moment = require('moment')
 
 module.exports = class Boulderer {
   constructor (name, level, boulderSessions = 0, id) {
@@ -11,12 +10,23 @@ module.exports = class Boulderer {
   }
 
   async searchBuddy (location, date) {
-    var dateFormatted = moment(date).format('D/M/YYYY')
-    const buddySearch = new BuddySearch(this.name, location, dateFormatted, this.level)
+    const formattedDate = date.toLocaleDateString('de-DE')
+    const buddySearch = new BuddySearch(this.name, location, formattedDate, this.level)
 
-    console.log(this.name + ' is searching for a boulder buddy')
+    console.log(this.name + ' is searching for a boulder buddy with search ' + buddySearch.summary)
 
     await BuddySearchService.add(buddySearch)
+  }
+
+  async deleteBuddySearch (locationName, date) {
+    const formattedDate = date.toLocaleDateString('de-DE')
+    const allSearches = await BuddySearchService.findAll()
+    const buddySearches = allSearches.filter(buddySearch =>
+      buddySearch.location.name === locationName && buddySearch.date === formattedDate)
+
+    await buddySearches.forEach(async function (buddySearch) {
+      await BuddySearchService.del(buddySearch.id)
+    })
   }
 
   boulder (location) {
