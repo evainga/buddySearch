@@ -24,9 +24,9 @@ module.exports = class Boulderer {
     const buddySearches = allSearches.filter(buddySearch =>
       buddySearch.location.name === locationName && buddySearch.date === formattedDate)
 
-    await buddySearches.forEach(async function (buddySearch) {
+    await buddySearches.forEach(async (buddySearch) =>
       await BuddySearchService.del(buddySearch.id)
-    })
+    )
   }
 
   boulder (location) {

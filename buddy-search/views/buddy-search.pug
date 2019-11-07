@@ -1,0 +1,6 @@
+extends layout
+
+block content
+    h1 The number of the buddy searches is #{buddySearches.length}
+    each buddySearch in buddySearches
+      p #{buddySearch.summary}

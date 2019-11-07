@@ -1,48 +1,85 @@
-const Boulderer = require('./models/boulderer')
-const Location = require('./models/location')
+const bodyParser = require('body-parser')
+const express = require('express')
 
 const BuddySearchService = require('./services/buddy-search-service')
 const BouldererService = require('./services/boulderer-service')
 const LocationService = require('./services/location-service')
 
-async function main () {
-  const eva = new Boulderer('Eva', 'ADVANCED')
-  const mike = new Boulderer('Mike', 'BEGINNER')
+const app = express()
+app.use(bodyParser.json())
 
-  const brightSite = new Location('Bright Site')
-  const boulderGarten = new Location('Bouldergarten')
+app.set('view engine', 'pug')
 
-  await BouldererService.add(eva)
-  await BouldererService.add(mike)
-  await LocationService.add(brightSite)
-  await LocationService.add(boulderGarten)
+app.get('/', (req, res) => {
+  res.render('index')
+})
 
-  boulderGarten.printBouldererNames()
-  brightSite.printBouldererNames()
+app.get('/boulderer/all', async (req, res) => {
+  const boulderers = await BouldererService.findAll()
+  res.render('boulderer', { boulderers })
+})
 
-  eva.boulder(boulderGarten)
-  eva.boulder(boulderGarten)
-  mike.boulder(boulderGarten)
-  mike.boulder(brightSite)
+app.get('/buddy-search/all', async (req, res) => {
+  const buddySearches = await BuddySearchService.findAll()
+  res.render('buddy-search', { buddySearches })
+})
 
-  boulderGarten.printBouldererNames()
-  brightSite.printBouldererNames()
+app.get('/location/all', async (req, res) => {
+  const locations = await LocationService.findAll()
+  res.render('location', { locations })
+})
 
-  const date = new Date(2019, 11, 1)
-  await eva.searchBuddy(brightSite, new Date(2019, 10, 30))
-  await mike.searchBuddy(boulderGarten, date)
-  await mike.searchBuddy(boulderGarten, date)
+app.get('/boulderer/:id', async (req, res) => {
+  const id = req.params.id
+  const boulderer = await BouldererService.find(id)
+  res.send(boulderer)
+})
 
-  let allSearches = await BuddySearchService.findAll()
-  console.log(allSearches.length)
+app.get('/location/:id', async (req, res) => {
+  const id = req.params.id
+  const location = await LocationService.find(id)
+  res.send(location)
+})
 
-  await mike.deleteBuddySearch(boulderGarten.name, date)
+app.get('/buddy-search/:id', async (req, res) => {
+  const id = req.params.id
+  const buddySearch = await BuddySearchService.find(id)
+  res.send(buddySearch)
+})
 
-  allSearches = await BuddySearchService.findAll()
-  console.log(allSearches.length)
-  allSearches.forEach(search => {
-    console.log(search.summary)
-  })
-}
+app.post('/boulderer', async (req, res) => {
+  const boulderer = await BouldererService.add(req.body)
+  res.send(boulderer)
+})
 
-main()
+app.post('/location', async (req, res) => {
+  const location = await LocationService.add(req.body)
+  res.send(location)
+})
+
+app.post('/buddy-search', async (req, res) => {
+  const buddySearch = await BuddySearchService.add(req.body)
+  res.send(buddySearch)
+})
+
+app.delete('boulderer/:id', async (req, res) => {
+  const id = req.params.id
+  await BouldererService.del(id)
+  res.send('ok')
+})
+
+app.delete('location/:id', async (req, res) => {
+  const id = req.params.id
+  await LocationService.del(id)
+  res.send('ok')
+})
+
+app.delete('buddy-search/:id', async (req, res) => {
+  const id = req.params.id
+  await BuddySearchService.del(id)
+  res.send('ok')
+})
+
+app.listen(3000, () => {
+  console.log('listening')
+})
