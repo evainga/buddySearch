@@ -1,12 +1,1 @@
-[[
-  "1",
-  "2"
-],{
-  "name": "3",
-  "boulderers": "4",
-  "id": 1
-},{
-  "name": "5",
-  "boulderers": "6",
-  "id": 2
-},"Bright Site",[],"Bouldergarten",[]]
+[["1","2","3","4","5"],{"name":"6","boulderers":"7","id":1},{"name":"8","boulderers":"9","id":2},{"name":"10","boulderers":"11","id":3},{"name":"12","boulderers":"13","id":4},{"name":"14","id":5},"Bright Site",[],"Bouldergarten",[],"Basement Boulderstudio",[],"Südblock",[],"Ostblock"]
