@@ -10,11 +10,9 @@ app.use(bodyParser.json())
 
 app.set('view engine', 'pug')
 
-
 app.get('/', (req, res) => {
   res.render('index')
 })
-
 
 app.get('/boulderer/all', async (req, res) => {
   const boulderers = await BouldererService.findAll()
@@ -37,7 +35,6 @@ app.delete('/boulderer/:id', async (req, res) => {
   await BouldererService.del(id)
   res.send('ok')
 })
-
 
 app.get('/buddy-search/all', async (req, res) => {
   const buddySearches = await BuddySearchService.findAll()
@@ -64,7 +61,6 @@ app.delete('/buddy-search/:id', async (req, res) => {
   res.send('ok')
 })
 
-
 app.get('/location/all', async (req, res) => {
   const locations = await LocationService.findAll()
   res.render('location', { locations })
@@ -86,7 +82,6 @@ app.delete('/location/:id', async (req, res) => {
   await LocationService.del(id)
   res.send('ok')
 })
-
 
 app.listen(3000, () => {
   console.log('listening')

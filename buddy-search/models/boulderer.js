@@ -18,17 +18,6 @@ module.exports = class Boulderer {
     await BuddySearchService.add(buddySearch)
   }
 
-  async deleteBuddySearch (locationName, date) {
-    const formattedDate = date.toLocaleDateString('de-DE')
-    const allSearches = await BuddySearchService.findAll()
-    const buddySearches = allSearches.filter(buddySearch =>
-      buddySearch.location.name === locationName && buddySearch.date === formattedDate)
-
-    await buddySearches.forEach(async (buddySearch) =>
-      await BuddySearchService.del(buddySearch.id)
-    )
-  }
-
   boulder (location) {
     console.log(this.name + ' boulders ' + location.name)
     this.boulderSessions += 1
