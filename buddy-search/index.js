@@ -55,6 +55,12 @@ app.post('/buddy-search', async (req, res) => {
   res.send(buddySearch)
 })
 
+app.post('/buddy-search-join', async (req, res) => {
+  const boulderer = await BouldererService.find(req.body.bouldererId)
+  const buddySearch = await boulderer.joinBuddy(req.body.searchId)
+  res.send(buddySearch)
+})
+
 app.delete('/buddy-search/:id', async (req, res) => {
   const id = req.params.id
   await BuddySearchService.del(id)

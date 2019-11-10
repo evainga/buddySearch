@@ -11,11 +11,24 @@ module.exports = class Boulderer {
 
   async searchBuddy (location, date) {
     const formattedDate = date.toLocaleDateString('de-DE')
-    const buddySearch = new BuddySearch(this.name, location, formattedDate, this.level)
+    const participants = []
+    const buddySearch = new BuddySearch(this.name, location, formattedDate, this.level, participants)
 
     console.log(this.name + ' is searching for a boulder buddy with search ' + buddySearch.summary)
 
     await BuddySearchService.add(buddySearch)
+  }
+
+  async joinBuddy (buddySearchId) {
+    const search = await BuddySearchService.find(buddySearchId)
+    const newParticipant = await BuddySearchService.find(this.id)
+    const oldParticipants = await search.participants
+    const newParticipants = oldParticipants.push(newParticipant)
+    await BuddySearchService.del(buddySearchId)
+    
+    const updatedSearch = new BuddySearch(search.name, search.location, search.date, search.level, newParticipants)
+    
+    await BuddySearchService.add(updatedSearch)
   }
 
   boulder (location) {
