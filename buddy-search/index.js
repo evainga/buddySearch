@@ -51,7 +51,10 @@ app.get('/buddy-search/:id', async (req, res) => {
 })
 
 app.post('/buddy-search', async (req, res) => {
-  const buddySearch = await BuddySearchService.add(req.body)
+  const date = new Date(req.body.date)
+  const boulderer = await BouldererService.find(req.body.bouldererId)
+  const location = await LocationService.find(req.body.locationId)
+  const buddySearch = await boulderer.searchBuddy(location, date)
   res.send(buddySearch)
 })
 
