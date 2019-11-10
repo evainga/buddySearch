@@ -29,12 +29,12 @@ To delete a location you can use:
 `axios.delete('/location/{id}')`  
 
 
-### Buddy-Searches
+### Buddy-Search
 To see all buddy-searches you can visit: 
 [localhost:3000/buddy-search/all](http://localhost:3000/buddy-search/all)  
 To see a specific buddy-search you can visit: 
 [localhost:3000/buddy-search/{id}](http://localhost:3000/buddy-search/{id})  
-To create a location you can use: 
+To create a buddy-search you can use: 
 `axios.post('/buddy-search', {bouldererId: 2, locationId: 4, date: '2019-11-3'})`  
 To delete a buddy-search you can use: 
 `axios.delete('/buddy-search/{id}')`  
