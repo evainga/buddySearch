@@ -8,7 +8,7 @@ const LocationSchema = new mongoose.Schema({
   },
   boulderers: [{
     type: mongoose.SchemaTypes.ObjectId,
-    ref: 'Location',
+    ref: 'Boulderer',
     autopopulate: {
       maxDepth: 1
     }

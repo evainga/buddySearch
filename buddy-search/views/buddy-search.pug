@@ -3,4 +3,9 @@ extends layout
 block content
     h1 The number of the buddy searches is #{buddySearches.length}
     each buddySearch in buddySearches
-      p #{buddySearch.summary}
+      p <b> searchId: #{buddySearch.id} </b>
+       - var participants = buddySearch.participants
+      p bouldererId: #{buddySearch.boulderer}, locationId: #{buddySearch.location}, date: #{buddySearch.date}, participantNumber: #{participants.length}
+      each participant in participants
+        li #{participant.id}
+      <br>
