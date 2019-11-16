@@ -17,9 +17,13 @@ class BuddySearchService extends BaseService {
   }
 
   async addParticipant (bouldererId, searchId) {
-    const search = await this.find(searchId)
-    search.participants.push(bouldererId)
-    await search.save()
+    const search = await this.find({ _id: searchId })
+    const participants = search.participants
+    const participantIds = participants.map(p => p.id)
+    if (!participantIds.includes(bouldererId)) {
+      participantIds.push(bouldererId)
+      await search.save()
+    } else throw new Error('participant already takes part at session!')
   }
 }
 

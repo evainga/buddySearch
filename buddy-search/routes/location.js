@@ -10,7 +10,7 @@ router.get('/all', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   const id = req.params.id
-  const location = await LocationService.find(id)
+  const location = await LocationService.find({ _id: id })
   res.send(location)
 })
 

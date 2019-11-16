@@ -5,7 +5,11 @@ block content
     each buddySearch in buddySearches
       p <b> searchId: #{buddySearch.id} </b>
        - var participants = buddySearch.participants
-      p bouldererId: #{buddySearch.boulderer}, locationId: #{buddySearch.location}, date: #{buddySearch.date}, participantNumber: #{participants.length}
-      each participant in participants
-        li #{participant.id}
-      <br>
+      p boulderer: #{buddySearch.boulderer}, location: #{buddySearch.location}, date: #{buddySearch.date}, participantNumber: #{participants.length}
+      if participants.length != 0
+        p participants are:
+        each participant in participants
+          li #{participant.name}
+        <br>
+      else
+        p no participants yet.

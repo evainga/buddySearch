@@ -1,10 +1,18 @@
 const mongoose = require('mongoose')
 
 const BouldererSchema = new mongoose.Schema({
-  name: String,
-  level: String,
+  name: {
+    type: String,
+    required: true
+  },
+  level: {
+    type: String,
+    enum: ['BEGINNER', 'MEDIUM', 'ADVANCED', 'PROFESSIONAL'],
+    required: true
+  },
   boulderSessions: {
     type: Number,
+    required: false,
     default: 0
   }
 })

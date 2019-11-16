@@ -10,7 +10,7 @@ router.get('/all', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   const id = req.params.id
-  const buddySearch = await BuddySearchService.find(id)
+  const buddySearch = await BuddySearchService.find({ _id: id })
   res.send(buddySearch)
 })
 
