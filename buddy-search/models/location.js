@@ -1,20 +1,22 @@
-module.exports = class Location {
-  constructor (name, boulderers = [], id) {
-    this.name = name
-    this.boulderers = boulderers
-    this.id = id
-  }
+const mongoose = require('mongoose')
 
-  printBouldererNames () {
-    if (this.boulderers.length === 0) {
-      console.log('Nobody has bouldered ' + this.name + '.')
-    } else {
-      console.log('Boulderers who have bouldered ' + this.name + ':')
-      this.boulderers.forEach(boulderer => boulderer.printName())
+const LocationSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    minlength: 2
+  },
+  boulderers: [{
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'Location',
+    autopopulate: {
+      maxDepth: 1
     }
-  }
+  }]
+})
 
-  static create ({ name, boulderers, id }) {
-    return new Location(name, boulderers, id)
-  }
-}
+LocationSchema.plugin(require('mongoose-autopopulate'))
+
+const LocationModel = mongoose.model('Location', LocationSchema)
+
+module.exports = LocationModel
