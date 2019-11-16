@@ -4,12 +4,12 @@ const BuddySearchModel = require('../models/buddy-search')
 const BuddySearchService = require('./buddy-search-service')
 
 class BouldererService extends BaseService {
-  constructor() {
-  super(BouldererModel)
-}
+  constructor () {
+    super(BouldererModel)
+  }
 
   async searchBuddy (boulderer, location, date) {
-    const buddySearch = new BuddySearchModel
+    const buddySearch = new BuddySearchModel()
     buddySearch.boulderer = boulderer
     buddySearch.location = location
     buddySearch.date = date.toLocaleDateString('de-DE')
@@ -24,9 +24,9 @@ class BouldererService extends BaseService {
   //   const oldParticipants = await search.participants
   //   const newParticipants = oldParticipants.push(newParticipant)
   //   await BuddySearchService.del(buddySearchId)
-    
+
   //   const updatedSearch = new BuddySearchModel(search.name, search.location, search.date, search.level, newParticipants)
-    
+
   //   await buddySearch.save(updatedSearch)
   // }
 }

@@ -17,11 +17,11 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    const date = new Date(req.body.date)
-      const boulderer = await BouldererService.find(req.body.bouldererId)
-      const location = await LocationService.find(req.body.locationId)
-      const buddySearch = await BouldererService.searchBuddy(boulderer, location, date)
- res.send(buddySearch)
+  const date = new Date(req.body.date)
+  const boulderer = await BouldererService.find(req.body.bouldererId)
+  const location = await LocationService.find(req.body.locationId)
+  const buddySearch = await BouldererService.searchBuddy(boulderer, location, date)
+  res.send(buddySearch)
 })
 
 router.post('/join', async (req, res) => {

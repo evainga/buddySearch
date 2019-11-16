@@ -4,11 +4,11 @@ const BuddySearchSchema = new mongoose.Schema({
   boulderer: {
     type: mongoose.SchemaTypes.ObjectId,
     required: true
-    },
+  },
   location: {
-    type:  mongoose.SchemaTypes.ObjectId,
+    type: mongoose.SchemaTypes.ObjectId,
     required: true
-    },
+  },
   date: {
     type: String,
     required: true
