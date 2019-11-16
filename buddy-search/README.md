@@ -1,6 +1,6 @@
 ## This is your app to find a buddy for bouldering and climbing.
 
-*BB* is still in a very early development stage - it currently is my playground for the WTMB JS course 2019.
+*BB* is my playground for the WTMB JS course 2019.
 
 ### Start the application
 Start the application with 
@@ -14,7 +14,7 @@ To see all boulderers you can visit:
 To see a specific boulderer you can visit: 
 [localhost:3000/boulderer/{id}](http://localhost:3000/boulderer/{id})  
 To create a boulderer you can use: 
-`axios.post('/boulderer', {name:'example name', level:'ADVANCED'|'BEGINNER'})`  
+`axios.post('/boulderer', {name:'example name', level:'BEGINNER'|'MEDIUM'|'ADVANCED'|'PROFESSIONAL'})`  
 To delete a boulderer you can use: 
 `axios.delete('/boulderer/{id}')`  
 
@@ -34,7 +34,10 @@ To see all buddy-searches you can visit:
 [localhost:3000/buddy-search/all](http://localhost:3000/buddy-search/all)  
 To see a specific buddy-search you can visit: 
 [localhost:3000/buddy-search/{id}](http://localhost:3000/buddy-search/{id})  
-To create a buddy-search you can use: 
-`axios.post('/buddy-search', {bouldererId: 2, locationId: 4, date: '2019-11-3'})`  
 To delete a buddy-search you can use: 
 `axios.delete('/buddy-search/{id}')`  
+
+To create a buddy-search you can use: 
+`axios.post('/buddy-search/search', {bouldererId: {id}, locationId: {id}, date: '2019-11-3'})`  
+To join a buddy-search you can use: 
+`axios.post('/buddy-search/join', {bouldererId: {id}, search: {id}})`  
