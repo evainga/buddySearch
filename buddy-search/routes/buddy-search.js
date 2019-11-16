@@ -3,7 +3,6 @@ const router = express.Router()
 
 const BuddySearchService = require('../services/buddy-search-service')
 const BouldererService = require('../services/boulderer-service')
-const LocationService = require('../services/location-service')
 
 router.get('/all', async (req, res) => {
   const buddySearches = await BuddySearchService.findAll()
@@ -16,17 +15,14 @@ router.get('/:id', async (req, res) => {
   res.send(buddySearch)
 })
 
-router.post('/', async (req, res) => {
+router.post('/search', async (req, res) => {
   const date = new Date(req.body.date)
-  const boulderer = await BouldererService.find(req.body.bouldererId)
-  const location = await LocationService.find(req.body.locationId)
-  const buddySearch = await BouldererService.searchBuddy(boulderer, location, date)
+  const buddySearch = await BouldererService.searchBuddy(req.body.bouldererId, req.body.locationId, date)
   res.send(buddySearch)
 })
 
 router.post('/join', async (req, res) => {
-  const boulderer = await BouldererService.find(req.body.bouldererId)
-  const buddySearch = await boulderer.joinBuddy(req.body.searchId)
+  const buddySearch = await BouldererService.joinBuddy(req.body.bouldererId, req.body.searchId)
   res.send(buddySearch)
 })
 
