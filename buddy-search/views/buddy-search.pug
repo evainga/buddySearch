@@ -5,7 +5,7 @@ block content
     each buddySearch in buddySearches
       p <b> searchId: #{buddySearch.id} </b>
        - var participants = buddySearch.participants
-      p boulderer: #{buddySearch.boulderer}, location: #{buddySearch.location}, date: #{buddySearch.date}, participantNumber: #{participants.length}
+      p #{buddySearch.boulderer.name} is looking for a boulder buddy at #{buddySearch.location.name} for #{buddySearch.date}!
       if participants.length != 0
         p participants are:
         each participant in participants

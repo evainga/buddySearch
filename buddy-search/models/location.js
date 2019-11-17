@@ -6,14 +6,14 @@ const LocationSchema = new mongoose.Schema({
     required: true,
     minlength: 2
   },
-  boulderers: [{
-    type: mongoose.SchemaTypes.ObjectId,
-    ref: 'Boulderer',
-    autopopulate: {
-      maxDepth: 1
-    }
-  }]
+  address: {
+    type: String,
+    required: false
+  }
 })
+
+mongoose.set('useCreateIndex', true)
+LocationSchema.index({ name: 1 }, { unique: true })
 
 LocationSchema.plugin(require('mongoose-autopopulate'))
 

@@ -40,4 +40,4 @@ To delete a buddy-search you can use:
 To create a buddy-search you can use: 
 `axios.post('/buddy-search/search', {bouldererId: {id}, locationId: {id}, date: '2019-11-3'})`  
 To join a buddy-search you can use: 
-`axios.post('/buddy-search/join', {bouldererId: {id}, search: {id}})`  
+`axios.post('/buddy-search/join', {bouldererId: {id}, searchId: {id}})`  

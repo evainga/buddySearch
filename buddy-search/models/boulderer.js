@@ -5,17 +5,25 @@ const BouldererSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  age: {
+    type: Number,
+    required: false
+  },
   level: {
     type: String,
     enum: ['BEGINNER', 'MEDIUM', 'ADVANCED', 'PROFESSIONAL'],
     required: true
   },
-  boulderSessions: {
-    type: Number,
-    required: false,
-    default: 0
-  }
+  buddySearches: [{
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'BuddySearch',
+    autopopulate: {
+      maxDepth: 1
+    }
+  }]
 })
+
+BouldererSchema.plugin(require('mongoose-autopopulate'))
 
 const BouldererModel = mongoose.model('Boulderer', BouldererSchema)
 

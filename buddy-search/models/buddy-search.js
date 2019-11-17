@@ -4,12 +4,18 @@ const BuddySearchSchema = new mongoose.Schema({
   boulderer: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'Boulderer',
-    required: true
+    required: true,
+    autopopulate: {
+      maxDepth: 1
+    }
   },
   location: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'Location',
-    required: true
+    required: true,
+    autopopulate: {
+      maxDepth: 1
+    }
   },
   date: {
     type: String,
@@ -19,7 +25,7 @@ const BuddySearchSchema = new mongoose.Schema({
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'Boulderer',
     autopopulate: {
-      maxDepth: 2
+      maxDepth: 1
     }
   }]
 })

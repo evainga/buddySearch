@@ -1,5 +1,7 @@
 const BaseService = require('./base-service')
 const BuddySearchModel = require('../models/buddy-search')
+const BouldererService = require('../services/boulderer-service')
+const LocationService = require('../services/location-service')
 
 class BuddySearchService extends BaseService {
   constructor () {
@@ -7,21 +9,26 @@ class BuddySearchService extends BaseService {
   }
 
   async createSearch (bouldererId, locationId, date) {
+    const boulderer = await BouldererService.find(bouldererId)
+    const location = await LocationService.find(locationId)
+
     const buddySearch = new BuddySearchModel()
-    buddySearch.boulderer = bouldererId
-    buddySearch.location = locationId
+    buddySearch.boulderer = boulderer
+    buddySearch.location = location
     buddySearch.date = date.toLocaleDateString('de-DE')
     buddySearch.participants = []
 
+    boulderer.buddySearches.push(buddySearch)
+
+    await boulderer.save()
     await this.add(buddySearch)
   }
 
   async addParticipant (bouldererId, searchId) {
-    const search = await this.find({ _id: searchId })
-    const participants = search.participants
-    const participantIds = participants.map(p => p.id)
-    if (!participantIds.includes(bouldererId)) {
-      participantIds.push(bouldererId)
+    const search = await this.find(searchId)
+    const boulderer = await BouldererService.find(bouldererId)
+    if (!search.participants.includes(boulderer)) {
+      search.participants.push(boulderer)
       await search.save()
     } else throw new Error('participant already takes part at session!')
   }
