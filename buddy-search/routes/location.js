@@ -8,9 +8,15 @@ router.get('/all', async (req, res) => {
   res.render('location', { locations })
 })
 
+router.get('/all/json', async (req, res) => {
+  const locations = await LocationService.findAll()
+  res.send(locations)
+})
+
 router.get('/:id', async (req, res) => {
   const id = req.params.id
   const location = await LocationService.find(id)
+  if (!location) res.status(404)
   res.send(location)
 })
 

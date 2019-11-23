@@ -49,3 +49,7 @@ fabric.properties
 
 # Visual studio
 *.code-workspace
+
+# nyc test coverage
+.nyc_output/
+
