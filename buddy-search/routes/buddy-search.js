@@ -8,9 +8,15 @@ router.get('/all', async (req, res) => {
   res.render('buddy-search', { buddySearches })
 })
 
+router.get('/all/json', async (req, res) => {
+  const buddySearches = await BuddySearchService.findAll()
+  res.send(buddySearches)
+})
+
 router.get('/:id', async (req, res) => {
   const id = req.params.id
   const buddySearch = await BuddySearchService.find(id)
+  if (!buddySearch) res.status(404)
   res.send(buddySearch)
 })
 

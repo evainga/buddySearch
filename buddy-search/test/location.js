@@ -8,6 +8,15 @@ import Location from '../models/location'
 
 const mongod = new MongodbMemoryServer()
 
+const location = new Location({
+  name: 'location 1',
+  address: 'address 1'
+})
+const location2 = new Location({
+  name: 'location 2',
+  address: 'address 2'
+})
+
 test.before(async () => {
   const uri = await mongod.getConnectionString()
   await mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true })
@@ -16,21 +25,15 @@ test.before(async () => {
 test.serial('Create new location', async t => {
   t.plan(3)
 
-  // Given
-  const locationToCreate = {
-    name: 'test name',
-    address: 'somewhere in Berlin'
-  }
-
   // When
   const res = await request(app)
     .post('/location')
-    .send(locationToCreate)
+    .send(location)
 
   // Then
   t.is(res.status, 200)
-  t.is(res.body.name, locationToCreate.name)
-  t.is(res.body.address, locationToCreate.address)
+  t.is(res.body.name, location.name)
+  t.is(res.body.address, location.address)
 })
 
 test.serial('Get all locations', async t => {
@@ -38,16 +41,7 @@ test.serial('Get all locations', async t => {
 
   // Given
 
-  const location1 = new Location({
-    name: 'location 1',
-    address: 'address 1'
-  })
-  const location2 = new Location({
-    name: 'location 2',
-    address: 'address 2'
-  })
-
-  await location1.save()
+  await location.save()
   await location2.save()
 
   // When
@@ -65,11 +59,6 @@ test.serial('Get specific location', async t => {
   t.plan(2)
 
   // Given
-  const location = new Location({
-    name: 'location',
-    address: 'address'
-  })
-
   const createdLocationBody = (await request(app).post('/location').send(location)).body
 
   // When
@@ -84,11 +73,6 @@ test.serial('Delete specific location', async t => {
   t.plan(3)
 
   // Given
-  const location = new Location({
-    name: 'location',
-    address: 'address'
-  })
-
   const createdLocationBody = (await request(app).post('/location').send(location)).body
 
   // When
