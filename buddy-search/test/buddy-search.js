@@ -11,7 +11,7 @@ import BouldererModel from '../models/boulderer'
 const mongod = new MongodbMemoryServer()
 
 test.before(async () => {
-  const uri = await mongod.getConnectionString()
+  const uri = await mongod.getConnectionString('BBSearchTest')
   await mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true })
 })
 

@@ -14,7 +14,7 @@ const location = new Location({
 })
 
 test.before(async () => {
-  const uri = await mongod.getConnectionString()
+  const uri = await mongod.getConnectionString('BBSearchTest')
   await mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true })
 })
 
@@ -53,7 +53,7 @@ test.serial('Get all locations', async t => {
   t.is(res.status, 200)
   t.is(jsonRes.status, 200)
   t.true(Array.isArray(jsonRes.body), 'Body should be an array')
-  t.true(jsonRes.body.length > 0)
+  t.true(jsonRes.body.length === 2)
 })
 
 test.serial('Get specific location', async t => {
