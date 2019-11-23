@@ -17,6 +17,7 @@ const BouldererSchema = new mongoose.Schema({
   buddySearches: [{
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'BuddySearch',
+    required: false,
     autopopulate: {
       maxDepth: 1
     }

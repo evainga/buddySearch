@@ -12,10 +12,6 @@ const location = new Location({
   name: 'location 1',
   address: 'address 1'
 })
-const location2 = new Location({
-  name: 'location 2',
-  address: 'address 2'
-})
 
 test.before(async () => {
   const uri = await mongod.getConnectionString()
@@ -40,8 +36,13 @@ test.serial('Get all locations', async t => {
   t.plan(4)
 
   // Given
-
   await location.save()
+
+  const location2 = new Location({
+    name: 'location 2',
+    address: 'address 2'
+  })
+
   await location2.save()
 
   // When
@@ -52,7 +53,7 @@ test.serial('Get all locations', async t => {
   t.is(res.status, 200)
   t.is(jsonRes.status, 200)
   t.true(Array.isArray(jsonRes.body), 'Body should be an array')
-  t.true(jsonRes.body.length === 2)
+  t.true(jsonRes.body.length > 0)
 })
 
 test.serial('Get specific location', async t => {

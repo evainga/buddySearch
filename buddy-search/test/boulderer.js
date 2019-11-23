@@ -15,13 +15,6 @@ const boulderer = new Boulderer({
   buddySearches: []
 })
 
-const boulderer2 = new Boulderer({
-  name: 'boulderer 2',
-  age: 22,
-  level: 'BEGINNER',
-  buddySearches: []
-})
-
 test.before(async () => {
   const uri = await mongod.getConnectionString()
   await mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true })
@@ -46,6 +39,14 @@ test.serial('Get all boulderers', async t => {
 
   // Given
   await boulderer.save()
+
+  const boulderer2 = new Boulderer({
+    name: 'boulderer 2',
+    age: 22,
+    level: 'BEGINNER',
+    buddySearches: []
+  })
+
   await boulderer2.save()
 
   // When
@@ -56,7 +57,7 @@ test.serial('Get all boulderers', async t => {
   t.is(res.status, 200)
   t.is(jsonRes.status, 200)
   t.true(Array.isArray(jsonRes.body), 'Body should be an array')
-  t.true(jsonRes.body.length === 2)
+  t.true(jsonRes.body.length > 0)
 })
 
 test.serial('Get specific boulderer', async t => {

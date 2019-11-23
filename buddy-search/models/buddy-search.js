@@ -24,6 +24,7 @@ const BuddySearchSchema = new mongoose.Schema({
   participants: [{
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'Boulderer',
+    required: false,
     autopopulate: {
       maxDepth: 1
     }
