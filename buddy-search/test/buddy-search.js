@@ -60,3 +60,8 @@ test.afterEach.always(() => {
   LocationModel.deleteMany()
   BouldererModel.deleteMany()
 })
+
+test.after.always(async t => {
+  mongoose.disconnect()
+  mongod.stop()
+})

@@ -8,11 +8,6 @@ import Location from '../models/location'
 
 const mongod = new MongodbMemoryServer()
 
-const location = new Location({
-  name: 'location 1',
-  address: 'address 1'
-})
-
 test.before(async () => {
   const uri = await mongod.getConnectionString('BBSearchTest')
   await mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true })
@@ -22,6 +17,11 @@ test.serial('Create new location', async t => {
   t.plan(3)
 
   // When
+  const location = new Location({
+    name: 'location 1',
+    address: 'address 1'
+  })
+
   const res = await request(app)
     .post('/location')
     .send(location)
@@ -36,13 +36,16 @@ test.serial('Get all locations', async t => {
   t.plan(4)
 
   // Given
+  const location1 = new Location({
+    name: 'location 1'
+  })
+
   await request(app)
     .post('/location')
-    .send(location)
+    .send(location1)
 
   const location2 = new Location({
-    name: 'location 2',
-    address: 'address 2'
+    name: 'location 2'
   })
 
   await request(app)
@@ -64,6 +67,10 @@ test.serial('Get specific location', async t => {
   t.plan(2)
 
   // Given
+  const location = new Location({
+    name: 'location 1'
+  })
+
   const createdLocationBody = (await request(app).post('/location').send(location)).body
 
   // When
@@ -78,6 +85,10 @@ test.serial('Delete specific location', async t => {
   t.plan(3)
 
   // Given
+  const location = new Location({
+    name: 'location 1'
+  })
+
   const createdLocationBody = (await request(app).post('/location').send(location)).body
 
   // When
@@ -92,3 +103,8 @@ test.serial('Delete specific location', async t => {
 })
 
 test.afterEach.always(() => Location.deleteMany())
+
+test.after.always(async t => {
+  mongoose.disconnect()
+  mongod.stop()
+})

@@ -8,20 +8,21 @@ import Boulderer from '../models/boulderer'
 
 const mongod = new MongodbMemoryServer()
 
-const boulderer = new Boulderer({
-  name: 'boulderer',
-  age: 32,
-  level: 'ADVANCED',
-  buddySearches: []
-})
-
 test.before(async () => {
   const uri = await mongod.getConnectionString('BBSearchTest')
   await mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true })
 })
 
-test.serial('Create new location', async t => {
+test.serial('Create new boulderer', async t => {
   t.plan(3)
+
+  // Given
+  const boulderer = new Boulderer({
+    name: 'boulderer',
+    age: 32,
+    level: 'ADVANCED',
+    buddySearches: []
+  })
 
   // When
   const res = await request(app)
@@ -38,15 +39,18 @@ test.serial('Get all boulderers', async t => {
   t.plan(4)
 
   // Given
+  const boulderer = new Boulderer({
+    name: 'boulderer',
+    level: 'ADVANCED'
+  })
+
   await request(app)
   .post('/boulderer')
   .send(boulderer)
 
   const boulderer2 = new Boulderer({
     name: 'boulderer 2',
-    age: 22,
-    level: 'BEGINNER',
-    buddySearches: []
+    level: 'BEGINNER'
   })
 
   await request(app)
@@ -68,6 +72,11 @@ test.serial('Get specific boulderer', async t => {
   t.plan(2)
 
   // Given
+  const boulderer = new Boulderer({
+  name: 'boulderer',
+  level: 'ADVANCED'
+})
+
   const createdBouldererBody = (await request(app).post('/boulderer').send(boulderer)).body
 
   // When
@@ -82,6 +91,11 @@ test.serial('Delete specific boulderer', async t => {
   t.plan(3)
 
   // Given
+  const boulderer = new Boulderer({
+    name: 'boulderer',
+    level: 'ADVANCED'
+  })
+
   const createdBouldererBody = (await request(app).post('/boulderer').send(boulderer)).body
 
   // When
@@ -96,3 +110,8 @@ test.serial('Delete specific boulderer', async t => {
 })
 
 test.afterEach.always(() => Boulderer.deleteMany())
+
+test.after.always(async t => {
+  mongoose.disconnect()
+  mongod.stop()
+})
