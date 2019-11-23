@@ -36,14 +36,18 @@ test.serial('Get all locations', async t => {
   t.plan(4)
 
   // Given
-  await location.save()
+  await request(app)
+    .post('/location')
+    .send(location)
 
   const location2 = new Location({
     name: 'location 2',
     address: 'address 2'
   })
 
-  await location2.save()
+  await request(app)
+  .post('/location')
+  .send(location2)
 
   // When
   const res = await request(app).get('/location/all')
@@ -84,7 +88,6 @@ test.serial('Delete specific location', async t => {
   t.is(res.ok, true)
 
   const fetch = await request(app).get(`/location/${createdLocationBody._id}`)
-  console.log(fetch.body)
   t.is(fetch.status, 404)
 })
 

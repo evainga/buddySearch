@@ -15,7 +15,7 @@ test.before(async () => {
   await mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true })
 })
 
-test('Create new buddySearch', async t => {
+test.serial('Create new location', async t => {
   t.plan(2)
 
   // Given

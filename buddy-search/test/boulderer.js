@@ -38,7 +38,9 @@ test.serial('Get all boulderers', async t => {
   t.plan(4)
 
   // Given
-  await boulderer.save()
+  await request(app)
+  .post('/boulderer')
+  .send(boulderer)
 
   const boulderer2 = new Boulderer({
     name: 'boulderer 2',
@@ -47,7 +49,9 @@ test.serial('Get all boulderers', async t => {
     buddySearches: []
   })
 
-  await boulderer2.save()
+  await request(app)
+    .post('/boulderer')
+    .send(boulderer2)
 
   // When
   const res = await request(app).get('/boulderer/all')
@@ -88,7 +92,6 @@ test.serial('Delete specific boulderer', async t => {
   t.is(res.ok, true)
 
   const fetch = await request(app).get(`/boulderer/${createdBouldererBody._id}`)
-  console.log(fetch.body)
   t.is(fetch.status, 404)
 })
 
