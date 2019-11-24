@@ -17,12 +17,12 @@ test.serial('Create new boulderer', async t => {
   t.plan(3)
 
   // Given
-  const boulderer = new Boulderer({
+  const boulderer = {
     name: 'boulderer',
     age: 32,
     level: 'ADVANCED',
     buddySearches: []
-  })
+  }
 
   // When
   const res = await request(app)
@@ -39,19 +39,19 @@ test.serial('Get all boulderers', async t => {
   t.plan(4)
 
   // Given
-  const boulderer = new Boulderer({
+  const boulderer = {
     name: 'boulderer',
     level: 'ADVANCED'
-  })
+  }
 
   await request(app)
-  .post('/boulderer')
-  .send(boulderer)
+    .post('/boulderer')
+    .send(boulderer)
 
-  const boulderer2 = new Boulderer({
+  const boulderer2 = {
     name: 'boulderer 2',
     level: 'BEGINNER'
-  })
+  }
 
   await request(app)
     .post('/boulderer')
@@ -72,10 +72,10 @@ test.serial('Get specific boulderer', async t => {
   t.plan(2)
 
   // Given
-  const boulderer = new Boulderer({
-  name: 'boulderer',
-  level: 'ADVANCED'
-})
+  const boulderer = {
+    name: 'boulderer',
+    level: 'ADVANCED'
+  }
 
   const createdBouldererBody = (await request(app).post('/boulderer').send(boulderer)).body
 
@@ -91,10 +91,10 @@ test.serial('Delete specific boulderer', async t => {
   t.plan(3)
 
   // Given
-  const boulderer = new Boulderer({
+  const boulderer = {
     name: 'boulderer',
     level: 'ADVANCED'
-  })
+  }
 
   const createdBouldererBody = (await request(app).post('/boulderer').send(boulderer)).body
 

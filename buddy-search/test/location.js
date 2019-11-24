@@ -1,6 +1,7 @@
 import test from 'ava'
 import request from 'supertest'
 import app from '../app'
+
 import MongodbMemoryServer from 'mongodb-memory-server'
 import mongoose from 'mongoose'
 
@@ -12,15 +13,14 @@ test.before(async () => {
   const uri = await mongod.getConnectionString('BBSearchTest')
   await mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true })
 })
-
 test.serial('Create new location', async t => {
   t.plan(3)
 
   // When
-  const location = new Location({
+  const location = {
     name: 'location 1',
     address: 'address 1'
-  })
+  }
 
   const res = await request(app)
     .post('/location')
@@ -36,21 +36,21 @@ test.serial('Get all locations', async t => {
   t.plan(4)
 
   // Given
-  const location1 = new Location({
+  const location1 = {
     name: 'location 1'
-  })
+  }
 
   await request(app)
     .post('/location')
     .send(location1)
 
-  const location2 = new Location({
+  const location2 = {
     name: 'location 2'
-  })
+  }
 
   await request(app)
-  .post('/location')
-  .send(location2)
+    .post('/location')
+    .send(location2)
 
   // When
   const res = await request(app).get('/location/all')
@@ -67,9 +67,9 @@ test.serial('Get specific location', async t => {
   t.plan(2)
 
   // Given
-  const location = new Location({
+  const location = {
     name: 'location 1'
-  })
+  }
 
   const createdLocationBody = (await request(app).post('/location').send(location)).body
 
@@ -85,9 +85,9 @@ test.serial('Delete specific location', async t => {
   t.plan(3)
 
   // Given
-  const location = new Location({
+  const location = {
     name: 'location 1'
-  })
+  }
 
   const createdLocationBody = (await request(app).post('/location').send(location)).body
 

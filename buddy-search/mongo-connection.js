@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 async function main () {
-  await mongoose.connect('mongodb://localhost/BBSearch', {
+  await mongoose.connect('mongodb://localhost/BBSearchMongo', {
     useUnifiedTopology: true,
     useNewUrlParser: true
   })

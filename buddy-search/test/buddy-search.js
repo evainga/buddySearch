@@ -19,21 +19,21 @@ test.serial('Create new location', async t => {
   t.plan(2)
 
   // Given
-  const boulderer = new BouldererModel({
+  const boulderer = {
     name: 'boulderer',
     age: 22,
     level: 'ADVANCED',
     buddySearches: []
-  })
+  }
 
-  const location = new LocationModel({ name: 'location' })
+  const location = { name: 'location' }
 
-  const buddySearchCreated = new BuddySearchModel({
+  const buddySearchCreated = {
     boulderer: boulderer,
     location: location,
     date: '2019-11-06',
     participants: []
-  })
+  }
 
   const createdLocationBody = (await request(app).post('/location').send(location)).body
   const createdBouldererBody = (await request(app).post('/boulderer').send(boulderer)).body
@@ -54,7 +54,6 @@ test.serial('Create new location', async t => {
   const buddySearchFetched = res.body
   t.deepEqual(buddySearchFetched, buddySearchCreated)
 })
-
 test.afterEach.always(() => {
   BuddySearchModel.deleteMany()
   LocationModel.deleteMany()

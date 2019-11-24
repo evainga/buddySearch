@@ -21,7 +21,8 @@ class BuddySearchService extends BaseService {
     boulderer.buddySearches.push(buddySearch)
 
     await boulderer.save()
-    await this.add(buddySearch)
+    const savedBuddySearch = await this.add(buddySearch)
+    return savedBuddySearch
   }
 
   async addParticipant (bouldererId, searchId) {
@@ -30,6 +31,7 @@ class BuddySearchService extends BaseService {
     if (!search.participants.includes(boulderer)) {
       search.participants.push(boulderer)
       await search.save()
+      return search
     } else throw new Error('participant already takes part at session!')
   }
 }
