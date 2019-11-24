@@ -2,8 +2,6 @@ import test from 'ava'
 import request from 'supertest'
 import app from '../app'
 
-import Location from '../models/location'
-
 test('Create new location', async t => {
   t.plan(3)
 
