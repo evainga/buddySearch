@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
 router.post('/search', async (req, res) => {
   const date = new Date(req.body.date)
   const buddySearch = await BuddySearchService.createSearch(req.body.bouldererId, req.body.locationId, date)
-  res.send(buddySearch)
+  res.send(buddySearch.id)
 })
 
 router.post('/join', async (req, res) => {

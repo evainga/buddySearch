@@ -12,9 +12,6 @@ const LocationSchema = new mongoose.Schema({
   }
 })
 
-mongoose.set('useCreateIndex', true)
-LocationSchema.index({ name: 1 }, { unique: true })
-
 LocationSchema.plugin(require('mongoose-autopopulate'))
 
 const LocationModel = mongoose.model('Location', LocationSchema)

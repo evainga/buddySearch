@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "ava --verbose --watch",
-    "test-coverage": "nyc ava --verbose"
+    "test": "MONGO_DBNAME='BBSTest' ava --verbose --watch",
+    "test-coverage": "MONGO_DBNAME='BBSTest' nyc ava --verbose"
   },
   "author": "Eva Göttert",
   "license": "ISC",

@@ -12,16 +12,16 @@ class BuddySearchService extends BaseService {
     const boulderer = await BouldererService.find(bouldererId)
     const location = await LocationService.find(locationId)
 
-    const buddySearch = new BuddySearchModel()
-    buddySearch.boulderer = boulderer
-    buddySearch.location = location
-    buddySearch.date = date.toLocaleDateString('de-DE')
-    buddySearch.participants = []
+    const buddySearchData = {
+      boulderer,
+      location,
+      date: date.toLocaleDateString('de-DE'),
+      participants: []
+    }
 
-    boulderer.buddySearches.push(buddySearch)
-
+    const savedBuddySearch = await this.add(buddySearchData)
+    await boulderer.buddySearches.push(savedBuddySearch)
     await boulderer.save()
-    const savedBuddySearch = await this.add(buddySearch)
     return savedBuddySearch
   }
 

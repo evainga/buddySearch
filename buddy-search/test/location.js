@@ -2,23 +2,14 @@ import test from 'ava'
 import request from 'supertest'
 import app from '../app'
 
-import MongodbMemoryServer from 'mongodb-memory-server'
-import mongoose from 'mongoose'
-
 import Location from '../models/location'
 
-const mongod = new MongodbMemoryServer()
-
-test.before(async () => {
-  const uri = await mongod.getConnectionString('BBSearchTest')
-  await mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true })
-})
-test.serial('Create new location', async t => {
+test('Create new location', async t => {
   t.plan(3)
 
   // When
   const location = {
-    name: 'location 1',
+    name: 'location name',
     address: 'address 1'
   }
 
@@ -32,25 +23,17 @@ test.serial('Create new location', async t => {
   t.is(res.body.address, location.address)
 })
 
-test.serial('Get all locations', async t => {
+test('Get all locations', async t => {
   t.plan(4)
 
   // Given
   const location1 = {
-    name: 'location 1'
+    name: 'location name 1'
   }
 
   await request(app)
     .post('/location')
     .send(location1)
-
-  const location2 = {
-    name: 'location 2'
-  }
-
-  await request(app)
-    .post('/location')
-    .send(location2)
 
   // When
   const res = await request(app).get('/location/all')
@@ -60,15 +43,15 @@ test.serial('Get all locations', async t => {
   t.is(res.status, 200)
   t.is(jsonRes.status, 200)
   t.true(Array.isArray(jsonRes.body), 'Body should be an array')
-  t.true(jsonRes.body.length === 2)
+  t.true(jsonRes.body.length > 0)
 })
 
-test.serial('Get specific location', async t => {
+test('Get specific location', async t => {
   t.plan(2)
 
   // Given
   const location = {
-    name: 'location 1'
+    name: 'location name'
   }
 
   const createdLocationBody = (await request(app).post('/location').send(location)).body
@@ -81,12 +64,12 @@ test.serial('Get specific location', async t => {
   t.deepEqual(res.body, createdLocationBody)
 })
 
-test.serial('Delete specific location', async t => {
+test('Delete specific location', async t => {
   t.plan(3)
 
   // Given
   const location = {
-    name: 'location 1'
+    name: 'location name'
   }
 
   const createdLocationBody = (await request(app).post('/location').send(location)).body
@@ -100,11 +83,4 @@ test.serial('Delete specific location', async t => {
 
   const fetch = await request(app).get(`/location/${createdLocationBody._id}`)
   t.is(fetch.status, 404)
-})
-
-test.afterEach.always(() => Location.deleteMany())
-
-test.after.always(async t => {
-  mongoose.disconnect()
-  mongod.stop()
 })
