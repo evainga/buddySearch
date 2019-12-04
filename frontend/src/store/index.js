@@ -15,7 +15,7 @@ export default new Vuex.Store({
   },
   actions: {
     async fetchBoulderers({commit}){
-      const result = await axios.get('http://localhost:3000/boulderer/all/json')
+      const result = await axios.get(`${process.env.VUE_APP_API_URL}/boulderer/all/json`)
       commit('SET_BOULDERERS', result.data)
     }
   },
