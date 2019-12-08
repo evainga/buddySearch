@@ -1,17 +1,23 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Boulderers from '../views/Boulderers.vue'
+import BuddySearches from '../views/BuddySearches.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/boulderers',
     name: 'boulderers',
     component: Boulderers
   },
   {
-    path: '/about',
+    path: '/buddy-searches',
+    name: 'buddySearches',
+    component: BuddySearches
+  },
+  {
+    path: '/',
     name: 'about',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Boulderers</router-link> |
-      <router-link to="/about">About BB Search</router-link>
+      <router-link to="/">About BB Search</router-link> |
+      <router-link to="/buddy-searches">Buddy Searches</router-link> |
+      <router-link to="/boulderers">Boulderers</router-link>
     </div>
     <router-view/>
   </div>

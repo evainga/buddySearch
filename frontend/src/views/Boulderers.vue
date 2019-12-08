@@ -25,7 +25,6 @@ export default {
     h1 Boulderers looking for buddys
     section
       boulderer-card(v-for="boulderer in boulderers", :boulderer="boulderer",  v-bind:key="boulderer.id")
-    
 </template>
 
 
