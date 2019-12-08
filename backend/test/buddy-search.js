@@ -22,7 +22,7 @@ test.serial('Create new buddy search', async t => {
   const buddySearchCreated = {
     boulderer,
     location,
-    date: '2019-11-11',
+    date: '11/11/2019',
     participants: []
   }
 
@@ -32,7 +32,7 @@ test.serial('Create new buddy search', async t => {
   const search = {
     bouldererId: `${createdBouldererBody._id}`,
     locationId: `${createdLocationBody._id}`,
-    date: '2019-11-11'
+    date: '11/11/2019'
   }
 
   // When
