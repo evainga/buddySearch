@@ -22,7 +22,7 @@ export default {
 
 <template lang="pug">
   div  
-    h1 BuddySearches
+    h1 Searches for boulder buddys
     section
       buddy-search-card(v-for="buddySearch in buddySearches", :buddySearch="buddySearch",  v-bind:key="buddySearch.id")
 </template>

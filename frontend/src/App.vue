@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">About BB Search</router-link> |
+      <router-link to="/">Intro</router-link> |
       <router-link to="/buddy-searches">Buddy Searches</router-link> |
       <router-link to="/boulderers">Boulderers</router-link>
     </div>
@@ -28,6 +28,6 @@
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #40778e;
 }
 </style>

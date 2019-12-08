@@ -7,8 +7,7 @@ export default {
 
 <template lang="pug">
 article.card
-    img(:src="`https://picsum.photos/300/200?random=${buddySearch._id}`", alt="random picture")
-    h2.card-title {{ buddySearch.location.name }} 
+    h2.card-title {{ buddySearch.location.name }}, {{buddySearch.date}} 
     p {{buddySearch.boulderer.name}}
     p {{buddySearch.boulderer.level}}
 </template>
@@ -21,11 +20,7 @@ article.card
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 3px;
-  margin: 20px;
-  min-width: 200px;
-  min-height: 340px;
-}
-.card-title{
-
+  margin: 10px;
+  min-width: 400px;
 }
 </style>
